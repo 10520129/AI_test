@@ -37,7 +37,7 @@ def get_NameByID(ID):
     cursor = conn.cursor()
 
     try:
-        cursor.execute(f"SELECT Name From test WHERE ID = {ID}")
+        cursor.execute("SELECT Name From test WHERE ID = ?", ID)
         name = cursor.fetchone()[0]
         conn.close()
         return name
