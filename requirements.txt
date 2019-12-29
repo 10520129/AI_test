@@ -4,3 +4,4 @@ numpy
 pandas
 gunicorn
 line-bot-sdk
+pymysql

@@ -55,6 +55,7 @@ from flask import Flask, request, abort
 from linebot import ( LineBotApi, WebhookHandler )
 from linebot.exceptions import( InvalidSignatureError )
 from linebot.models import *
+import conSql as cons
 
 ###=== (5.2) 程式宣告 ===###  
 app = Flask(__name__)  # __name__ 代表目前執行的模組
@@ -88,6 +89,12 @@ def handle_message(event):
     print(event)
     if event.message.id == "100001":
         return
+
+    userID = event.source.userID
+    print(userID)
+    name = cons.get_NameByID(userID)
+    print(name)
+
     text = event.message.text
     happy = ["可愛","喜歡","愛","乖"]
     sad = ["討厭","拋棄","丟掉"]
@@ -139,7 +146,7 @@ def handle_message(event):
         reply_text = "（伸出右手）"
         line_bot_api.reply_message(event.reply_token, TextSendMessage(reply_text))
     else: # 如果非以上的選項，就會學你說話
-        reply_text = text
+        reply_text = f"是的~ {name}"
         line_bot_api.reply_message(event.reply_token, TextSendMessage(reply_text))
         # line_bot_api.push_message(event.push_token, StickerSendMessage(package_id=3, sticker_id=203)) 
     # message = TextSendMessage(reply_text)
