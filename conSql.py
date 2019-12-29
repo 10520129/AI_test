@@ -21,7 +21,7 @@ def get_All():
 
     try:
         cursor.execute(f"SELECT * From test")
-        data = cursor.fetall()
+        data = cursor.fetchall()
         print(data)
         conn.close()
         return data
