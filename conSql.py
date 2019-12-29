@@ -14,6 +14,23 @@ def get_conn():
     except:
         print('連接失敗')
 
+def get_All():
+
+    conn = get_conn()
+    cursor = conn.cursor()
+
+    try:
+        cursor.executef"SELECT * From test")
+        data = cursor.fetall()
+        print(data)
+        conn.close()
+        return data
+    except:
+        print ("寫入資料庫失敗")
+        print(sys.exc_info())
+        conn.close()
+
+
 def get_NameByID(ID):
 
     conn = get_conn()

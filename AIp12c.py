@@ -90,6 +90,8 @@ def handle_message(event):
     if event.message.id == "100001":
         return
 
+    print(cons.get_All())
+
     userID = event.source.user_id
     print(userID)
     name = cons.get_NameByID(userID)
