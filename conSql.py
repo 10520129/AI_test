@@ -20,7 +20,7 @@ def get_All():
     cursor = conn.cursor()
 
     try:
-        cursor.executef"SELECT * From test")
+        cursor.execute(f"SELECT * From test")
         data = cursor.fetall()
         print(data)
         conn.close()
