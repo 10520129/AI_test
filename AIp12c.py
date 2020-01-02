@@ -119,7 +119,7 @@ def handle_message(event):
 
     if(text.find("我是") != -1):
         cons.insert_NameByID(text[2:], user_id)
-        reply_text = f"汪汪汪~~(對撒嬌{text[2:]}撒嬌)"
+        reply_text = f"汪汪汪~~(對{text[2:]}撒嬌)"
         line_bot_api.reply_message(event.reply_token, TextSendMessage(reply_text))
 
     elif name == None:
