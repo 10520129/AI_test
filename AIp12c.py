@@ -113,11 +113,11 @@ def handle_message(event):
                 h = 0
                 break
 
-    name = cons.get_NameByID(userID)
+    name = cons.get_NameByID(user_id)
     print(name)
 
     if(text.find("我是") != -1):
-        cons.insert_NameByID(text[2:], userID)
+        cons.insert_NameByID(text[2:], user_id)
         reply_text = f"汪汪汪~~(對撒嬌{text[2:]}撒嬌)"
         line_bot_api.reply_message(event.reply_token, TextSendMessage(reply_text))
 
