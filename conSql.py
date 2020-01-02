@@ -50,9 +50,10 @@ def get_NameByID(ID):
 
     try:
         cursor.execute("SELECT Name From test WHERE ID = ?", [ID])
-        name = cursor.fetchone()[0]
+        data = cursor.fetchone()
+        if data == None: return None
         conn.close()
-        return name
+        return data[0]
     except:
         print ("寫入資料庫失敗")
         print(sys.exc_info())

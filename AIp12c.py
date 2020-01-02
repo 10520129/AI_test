@@ -127,10 +127,16 @@ def handle_message(event):
         pass
         #reply_text = "汪汪??汪?(牠好像還不知道你的名字)"
         #line_bot_api.reply_message(event.reply_token, TextSendMessage(reply_text))
+        
+    if(text.find("我是") != -1):
+        cons.insert_NameByID(text[2:], userID)
+        reply_text = f"汪汪汪~~(對撒嬌{text[2:]}撒嬌)"
+        line_bot_api.reply_message(event.reply_token, TextSendMessage(reply_text))
 
-    if name == None:
+    elif name == None:
         reply_text = "汪汪??汪?(牠好像還不知道你的名字)"
         line_bot_api.reply_message(event.reply_token, TextSendMessage(reply_text))
+        
         
     if h == 1:
         reply_text = "^__^"
@@ -159,10 +165,6 @@ def handle_message(event):
         line_bot_api.reply_message(event.reply_token, TextSendMessage(reply_text))
     elif(text.find("右") != -1):
         reply_text = "（伸出右手）"
-        line_bot_api.reply_message(event.reply_token, TextSendMessage(reply_text))
-    elif(text.find("我是") != -1):
-        cons.insert_NameByID(text[2:], userID)
-        reply_text = f"汪汪汪~~(對撒嬌{text[2:]}撒嬌)"
         line_bot_api.reply_message(event.reply_token, TextSendMessage(reply_text))
     else: # 如果非以上的選項，就會學你說話
         reply_text = f"是的~ {name}"
