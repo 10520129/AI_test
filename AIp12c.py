@@ -56,6 +56,7 @@ from linebot import ( LineBotApi, WebhookHandler )
 from linebot.exceptions import( InvalidSignatureError )
 from linebot.models import *
 import conSql as cons
+import time
 
 ###=== (5.2) 程式宣告 ===###  
 app = Flask(__name__)  # __name__ 代表目前執行的模組
