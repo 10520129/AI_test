@@ -30,6 +30,19 @@ def get_All():
         print(sys.exc_info())
         conn.close()
 
+def insert_NameByID(Name, ID):
+    
+    conn = get_conn()
+    cursor = conn.cursor()
+
+    try:
+        cursor.execute("INSERT INTO test (ID, Name) VALUES (?, ?)", [ID, Name])
+        cursor.commit()
+        conn.close()
+    except:
+        print ("寫入資料庫失敗")
+        print(sys.exc_info())
+        conn.close()
 
 def get_NameByID(ID):
 
