@@ -113,11 +113,8 @@ def handle_message(event):
                 h = 0
                 break
 
-    try:
-        name = cons.get_NameByID(userID)
-        print(name)
-    except:
-        pass
+    name = cons.get_NameByID(userID)
+    print(name)
 
     if(text.find("我是") != -1):
         cons.insert_NameByID(text[2:], userID)
