@@ -87,14 +87,9 @@ def callback():
 @handler.add(MessageEvent, message=TextMessage)
 def handle_message(event):
     print(event)
+    user_id = event.source.user_id
     if event.message.id == "100001":
         return
-
-    print(cons.get_All())
-
-    userID = event.source.user_id
-    
-
     text = event.message.text
     happy = ["可愛","喜歡","愛","乖"]
     sad = ["討厭","拋棄","丟掉"]
@@ -118,16 +113,12 @@ def handle_message(event):
                 h = 0
                 break
 
-    
-    print(userID)
     try:
         name = cons.get_NameByID(userID)
         print(name)
     except:
         pass
-        #reply_text = "汪汪??汪?(牠好像還不知道你的名字)"
-        #line_bot_api.reply_message(event.reply_token, TextSendMessage(reply_text))
-        
+
     if(text.find("我是") != -1):
         cons.insert_NameByID(text[2:], userID)
         reply_text = f"汪汪汪~~(對撒嬌{text[2:]}撒嬌)"
@@ -136,42 +127,50 @@ def handle_message(event):
     elif name == None:
         reply_text = "汪汪??汪?(牠好像還不知道你的名字)"
         line_bot_api.reply_message(event.reply_token, TextSendMessage(reply_text))
-        
-        
-    if h == 1:
+
+    elif h == 1:
         reply_text = "^__^"
-        line_bot_api.reply_message(event.reply_token, TextSendMessage(reply_text))
+        line_bot_api.push_message(user_id, TextSendMessage(reply_text))
+        h = 0
     elif h == -1:
-        reply_text = "T__T"
-        line_bot_api.reply_message(event.reply_token, TextSendMessage(reply_text))
-    h = 0
-    if (text.find("壞") != -1):
-        line_bot_api.reply_message(event.reply_token, StickerSendMessage(package_id=11537, sticker_id=52002746))
+        line_bot_api.push_message(user_id, StickerSendMessage(package_id=11537, sticker_id=52002746))
+        for i in range(10):
+            if (10-i) == 4:
+                line_bot_api.push_message(user_id, TextSendMessage("..."))
+            time.sleep(1)
+        line_bot_api.push_message(user_id, TextSendMessage("冷卻完畢"))
+        h = 0
+    elif (text.find("壞") != -1):
+        line_bot_api.push_message(user_id, StickerSendMessage(package_id=11537, sticker_id=52002746))
+        for i in range(10):
+            if (10-i) == 4:
+                line_bot_api.push_message(user_id, TextSendMessage("..."))
+            time.sleep(1)
+        line_bot_api.push_message(user_id, TextSendMessage("冷卻完畢"))
     elif (text.find("狗狗") != -1):
         reply_text = "凹嗚～"
-        line_bot_api.reply_message(event.reply_token, TextSendMessage(reply_text))
-        # Your user ID
+        line_bot_api.push_message(user_id, TextSendMessage(reply_text))
     elif(text.find("吃飯") != -1): 
         reply_text = "（踏踏踏踏...）"
-        line_bot_api.reply_message(event.reply_token, TextSendMessage(reply_text))
+        line_bot_api.push_message(user_id, TextSendMessage(reply_text))
     elif(text.find("散步") != -1):
         reply_text = "汪！"
-        line_bot_api.reply_message(event.reply_token, TextSendMessage(reply_text))
+        line_bot_api.push_message(user_id, TextSendMessage(reply_text))
     elif(text.find("握手") != -1):
         reply_text = "（伸出右手）"
-        line_bot_api.reply_message(event.reply_token, TextSendMessage(reply_text))
+        line_bot_api.push_message(user_id, TextSendMessage(reply_text))
     elif(text.find("左") != -1):
         reply_text = "（伸出左手）"
-        line_bot_api.reply_message(event.reply_token, TextSendMessage(reply_text))
+
+        line_bot_api.push_message(user_id, TextSendMessage(reply_text))
     elif(text.find("右") != -1):
         reply_text = "（伸出右手）"
-        line_bot_api.reply_message(event.reply_token, TextSendMessage(reply_text))
+        line_bot_api.push_message(user_id, TextSendMessage(reply_text))
     else: # 如果非以上的選項，就會學你說話
         reply_text = f"是的~ {name}"
-        line_bot_api.reply_message(event.reply_token, TextSendMessage(reply_text))
-        # line_bot_api.push_message(event.push_token, StickerSendMessage(package_id=3, sticker_id=203)) 
-    # message = TextSendMessage(reply_text)
-    # line_bot_api.reply_message(event.reply_token, message)
+        line_bot_api.push_message(user_id, TextSendMessage(reply_text))
+        
+    
 
 ###=== (5.6) 執行程式  ===###
 import os
