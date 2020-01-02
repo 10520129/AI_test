@@ -37,6 +37,7 @@ def insert_NameByID(Name, ID):
 
     try:
         cursor.execute("INSERT INTO test (ID, Name) VALUES (?, ?)", [ID, Name])
+        conn.commit()
         conn.close()
     except:
         print ("寫入資料庫失敗")
